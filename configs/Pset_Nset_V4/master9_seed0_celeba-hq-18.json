@@ -1,0 +1,41 @@
+{
+  "face_descriptor": "facenet_l2_dropped_trained_on_casia",
+  "img_size": 160,
+  "apply_l2" : 1,
+  "number_of_data_for_dev_purpose_only" : -1,
+  "distance_func": "euclidean",
+  "use_threshold_for_best_accuracy_or_for_closest_to_FAR001": "far001",
+
+  "p_set_threshold_coefficient": 1,
+  "n_set_threshold_coefficient": 1,
+
+ "p_set_number_of_identities_list": [5749],
+ "p_set_instances_per_identity": 1,
+ "pstar_set_instances_per_identity": 0,
+ "p_set_number_of_clusters_list": [9],
+ "p_data_lock_weight": 0.99,
+
+  "n_set_number_of_identities_list": [0],
+  "n_set_instances_per_identity": 1,
+  "nstar_set_instances_per_identity": 0,
+  "n_data_lock_weight": 1,
+
+  "p_n_balance_weight": 0.9,
+
+  "seed_list": [0],
+
+
+  "GA_number_of_generations": 1000,
+  "GA_sigma": 0.3,
+  "GA_population_size": 100,
+
+
+  "deriveImg_a_face": "celeba-hq-18.jpg",
+  "use_the_only_nset_image_as_deriveImg": 0,
+  "deriveImg_epsilon": 0.01,
+  "deriveImg_loss_function":  "euclidean",
+  "deriveImg_iterations": 1000,
+  "clip_to_min": -1.0,
+  "clip_to_max": 1.0,
+  "deriveImg_perturbation_limit": 0.3
+ }
