@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=def-pbranco
-#SBATCH --gres=gpu:v100:1
+#SBATCH --gres=gpu:v100l:1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=7G            # memory for the entire job across all cores
 #SBATCH --time=00-04:00      # time (DD-HH:MM)
