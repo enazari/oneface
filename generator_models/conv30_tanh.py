@@ -7,6 +7,7 @@ from tensorflow.keras.layers import UpSampling2D, Conv2D
 # image size is 224
 def return_generator_model_and_imgsize(latent_dim=224):
     # returns (Model, output image size)
+
     model = Sequential()
 
     model.add(Dense(47 * 3 * 3, activation="relu", input_dim=latent_dim))
