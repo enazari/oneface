@@ -33,70 +33,13 @@ For the complete study, detailed methodologies, and further discussions, please 
 # One Face to Rule Them All: Algorithms
 
 ## Pseudo-Code for the DodgePersonation Attack (Phase 1)
+![the procedural steps for executing the DodgePersonation Attack.](https://github.com/enazari/oneface/blob/master/other/assets/algo2.png)
 Algorithm~\ref{alg:phase2} describes the procedural steps for executing the DodgePersonation Attack by navigating through the embedding space to identify a point or a set of points.
 
-\begin{algorithm}[htpb]
-\footnotesize
-% \small
-\caption{One Face to Rule Them All - Phase 1: Embedding space Search}\label{alg:phase2}
-  \KwInput{$\overline{MatchSet}$: set of all face embeddings to impersonate;\\
-  \hspace{0.8cm}$\overline{DodgeSet}$: set of all face embeddings to dodge;\\
-  \hspace{0.8cm}$\alpha$, $\beta$: weights for positive and negative $DPloss$, respectively;\\
-  \hspace{0.8cm}$\gamma$: weight for the DodgePersonation Fitness function\\
-  \hspace{0.8cm}$th1$, $th2$: DodgePersonation Fitness thresholds\\
-  \hspace{0.8cm}$gen$: number of GA generations\\
-  \hspace{0.8cm}$C$: number of clusters 
-  }
-  \KwOutput{$best\_emb$: best C points found in the embedding space. }
-  
- 
- $best\_emb \gets []$\\
- $Clusters \gets K\text{-}Means(\textrm{ $C$, $\overline{MatchSet}$)}$\\
-\For{cluster in Clusters}{ 
-
-    $centroid_{norm} \gets\textrm{cluster centroid normalized to unit vector}$\\
-    $pp \gets\textrm{ initialize first population with }centroid_{norm}$\\
-    \For{generation in gen}{
-    $pp'\gets \text{ generate new population based on } pp$\\
-    $pp'_{norm} \gets\textrm{normalize to unit vector elements of } pp'$\\
-    $loss \gets\textrm{[]}$\\
-    \For{$pp'_{i}$ in $pp'_{norm}$ }{
-        $loss \gets loss \cup  fitness(pp'_{i},cluster,\overline{DodgeSet},th1,th2,\alpha,\beta,\gamma)$
-    }
-
-    $pp \gets $ top $|pp'|$ with lowest $loss$ from $pp'_{norm}$ 
-} 
-    $best\_emb \gets best\_emb \cup \textrm{embedding with lowest loss in } pp$
-}
-\Return $best\_emb$
-\end{algorithm}
 
 
-## Algorithm: One Face to Rule Them All - Phase 2: Attack Face Generation
+## Pseudo-Code for the Attack Face Generation (Phase 2) 
 ![One Face to Rule Them All Algorithm - Phase 2: Attack Face Generation.](https://github.com/enazari/oneface/blob/master/other/assets/algo1.png)
-**Input:**
-- `x`: Source Face
-- `\bar{y}`: point in the embedding space returned in Phase 1
-- `\epsilon`: maximum change allowed for each pixel of the normalized image
-- `iterations`: number of iterations
-
-**Output:**
-- `x_{adv}`: attack image
-
-**Procedure:**
-1. **While** `x` != MTCNN(`x`):
-    - `x` <- MTCNN(`x`)
-2. `x_{adv}` <- `x`
-3. **For** each `iter` in `iterations`:
-    - `\bar{x}_{adv}` <- FM(`x_{adv}`)
-    - `loss` <- Dist(`\bar{x}_{adv}`, `\bar{y}`)
-    - `gradients` <- \frac{\partial loss}{\partial x_{adv}}
-    - `x_{adv}` <- Adam(`x_{adv}`, `gradients`)
-    - `x_{adv}` <- clip(`x_{adv}`, [`x_{adv}-\epsilon`, `x_{adv}+\epsilon`])
-4. **Return** `x_{adv}`
-
-**Caption:** One Face to Rule Them All Algorithm - Phase 2: Attack Face Generation.
-
 
 
 # One Face to Rule Them All: Taxonomy Discussion 
@@ -156,75 +99,14 @@ Two experiments were performed to gain a better understanding of how the face im
 
 ## Detailed results of varying size of MatchSet and DodgeSet \label{app:table}
 
-Table~\ref{tab:phase3_10clusters} shows the detailed results of the experiment carried out in Section~\ref{sec:res1} and summarized in Figure~\ref{fig:phase3_10clusters}.
+The following table shows the detailed results of the experiment summarized in the following Figure where coverage results for different MatchSet and DodgeSet sizes are displayed. Each plot shows the coverage on the MatchSet on the left-hand side and the coverage on the DodgeSet on the right-hand side. The coverage results on the two sets are connected by a line with a color corresponding to the phase where it was calculated.
+![coverage results for different MatchSet and DodgeSet sizes.](https://github.com/enazari/oneface/blob/master/other/assets/phase3_10clusters.png)
+
+
+![Results of different MatchSet and DodgeSet sizes in Phase 1 and Phase 2 of the One Face to Rule Them All Algorithm. The results are the average of 5 runs for 10 clusters.](https://github.com/enazari/oneface/blob/master/other/assets/phase3_10clusters_table.png)
 
 
 
-\begin{table}
-\centering
-\caption{Results of different MatchSet and DodgeSet sizes in Phase 1 and Phase 2 of the One Face to Rule Them All Algorithm. The results are the average of 5 runs for 10 clusters. This table corresponds to the results shown in Figure~\ref{fig:phase3_10clusters}.}
-\label{tab:phase3_10clusters}
-
-\resizebox{0.7\textwidth}{!}
-{
-
-\begin{tabular}{@{}rrrrrr@{}}
-\toprule
- \multirow{2}{*}{$|\mathcal{M}$atchSet$|$} &   \multirow{2}{*}{$|\mathcal{D}$odgeSet$|$} &  \multicolumn{4}{c}{Coverage}\\
-  \cline{3-6}
-\vspace*{-0.25cm}\\  
-  & &  $\overline{MatchSet}$ &  $\overline{DodgeSet}$ &  MatchSet &  DodgeSet \\
-\midrule
-         10 &           0 &    100.00 &      0.00 &            100.00 &              0.00 \\ \hline
-         10 &           1 &    100.00 &      0.00 &            100.00 &              0.00 \\ \hline
-         10 &           2 &    100.00 &      0.00 &            100.00 &              0.00 \\ \hline
-         10 &           3 &    100.00 &      0.00 &            100.00 &              0.00 \\ \hline
-         10 &          10 &    100.00 &      0.00 &            100.00 &             10.00 \\ \hline
-         10 &         100 &    100.00 &      0.00 &            100.00 &              3.25 \\ \hline
-         10 &         500 &    100.00 &      0.00 &            100.00 &              4.15 \\ \hline
-         10 &        1000 &    100.00 &      0.00 &            100.00 &              3.48 \\ \hline
-         10 &        2500 &    100.00 &      0.45 &            100.00 &              2.48 \\ \hline
-        100 &           0 &     77.75 &      0.00 &             74.00 &              0.00 \\ \hline
-        100 &           1 &     77.00 &      0.00 &             73.50 &              0.00 \\ \hline
-        100 &           2 &     77.50 &      0.00 &             74.50 &              0.00 \\ \hline
-        100 &           3 &     77.75 &      0.00 &             74.50 &              8.33 \\ \hline
-        100 &          10 &     77.25 &      0.00 &             75.25 &             22.50 \\ \hline
-        100 &         100 &     76.25 &      0.00 &             74.25 &             13.25 \\ \hline
-        100 &         500 &     73.75 &      0.05 &             70.25 &              9.35 \\ \hline
-        100 &        1000 &     73.00 &      0.05 &             69.50 &              8.42 \\ \hline
-        100 &        2500 &     66.33 &      0.13 &             65.33 &              5.16 \\ \hline
-        500 &           0 &     68.85 &      0.00 &             65.15 &              0.00 \\ \hline
-        500 &           1 &     66.50 &      0.00 &             62.55 &              0.00 \\ \hline
-        500 &           2 &     67.40 &      0.00 &             63.35 &             12.50 \\ \hline
-        500 &           3 &     67.70 &      0.00 &             64.10 &             16.67 \\ \hline
-        500 &          10 &     67.55 &      5.00 &             63.50 &             20.00 \\ \hline
-        500 &         100 &     65.65 &      3.50 &             62.47 &             24.00 \\ \hline
-        500 &         500 &     54.40 &      1.15 &             52.35 &             18.55 \\ \hline
-        500 &        1000 &     47.60 &      0.88 &             47.40 &             20.38 \\ \hline
-        500 &        2500 &     39.20 &      0.45 &             41.40 &             16.67 \\ \hline
-       1000 &           0 &     67.62 &      0.00 &             63.82 &              0.00 \\ \hline
-       1000 &           1 &     65.42 &      0.00 &             61.52 &              0.00 \\ \hline
-       1000 &           2 &     66.12 &      0.00 &             61.78 &             12.50 \\ \hline
-       1000 &           3 &     66.45 &      0.00 &             62.68 &              8.33 \\ \hline
-       1000 &          10 &     66.85 &      2.50 &             62.38 &             17.50 \\ \hline
-       1000 &         100 &     64.47 &     11.33 &             60.70 &             33.67 \\ \hline
-       1000 &         500 &     56.00 &      7.65 &             54.68 &             30.20 \\ \hline
-       1000 &        1000 &     47.00 &      5.00 &             47.30 &             29.50 \\ \hline
-       1000 &        2500 &     35.63 &      3.15 &             40.53 &             26.15 \\ \hline
-       2500 &           0 &     65.86 &      0.00 &             61.56 &              0.00 \\ \hline
-       2500 &           1 &     64.23 &      0.00 &             59.57 &              0.00 \\ \hline
-       2500 &           2 &     64.88 &      0.00 &             61.31 &             12.50 \\ \hline
-       2500 &           3 &     65.11 &      0.00 &             60.92 &             25.00 \\ \hline
-       2500 &          10 &     65.16 &     12.50 &             61.01 &             50.00 \\ \hline
-       2500 &         100 &     64.61 &     30.67 &             60.36 &             46.67 \\ \hline
-       2500 &         500 &     61.47 &     29.75 &             58.34 &             41.85 \\ \hline
-       2500 &        1000 &     59.25 &     30.20 &             57.29 &             43.60 \\ \hline
-       2500 &        2500 &     51.42 &     27.24 &             51.20 &             43.40 \\ 
-\bottomrule
-\end{tabular}
-
-}
-\end{table}
 
 ## Extra Results on Multi Identity Impersonation or Master Face \label{app:einstein}
 
