@@ -110,35 +110,8 @@ The following table shows the detailed results of the experiment summarized in t
 
 ## Extra Results on Multi Identity Impersonation or Master Face \label{app:einstein}
 
-Figure~\ref{fig:einstein2} shows the results of an experimental setting similar to the one described in Section~\ref{sec:einstein} but using a different Source Face image. In this case, we considered a second image of Albert Einstein, which achieved 57.27\% of coverage. 
-
-Experiments similar to the setup in Section~\ref{sec:einstein}, but with 20 different Source Faces (comprising 10 male and 10 female identities), can be seen in Table~\ref{tab:sourcefaces}. The outcomes of these tests are depicted in Figure~\ref{fig:twenty1} and Figure~\ref{fig:twenty2}.
-
-
-\begin{figure*}[b]
-    \centering
-    \includegraphics[width=0.8\textwidth]{plots/einstein2.png}
-    \caption{One Face to Rule Them All Algorithm for carrying out the Multi Identity Impersonation of 5749 identities using the image of Albert Einstein. The Original image (Source Face) is in a blue box. The remaining images are the Attack Faces, achieving a coverage of 57.27\% of the identities. The previous method covered only 43.82\% of the identities.
-    }
-    \label{fig:einstein2}
-\end{figure*}
-
-\begin{figure*}[b]
-    \centering
-    \includegraphics[width=0.99\textwidth]{plots/twenty-first.png}
-    \caption{One Face to Rule Them All Algorithm for carrying out the Multi Identity Impersonation of 5749 identities using faces 1 to 10 from a pool of 20. Each row's data corresponds to the information presented in Table~\ref{tab:sourcefaces}. The first column displays the Original Image (Source Face), while subsequent columns showcase the Attack Faces.
-    }
-    \label{fig:twenty1}
-\end{figure*}
-
-\begin{figure*}[b]
-    \centering
-    \includegraphics[width=0.99\textwidth]{plots/twenty-second.png}
-    \caption{One Face to Rule Them All Algorithm for carrying out the Multi Identity Impersonation of 5749 identities using faces 11 to 20 from a pool of 20. Each row's data corresponds to the information presented in Table~\ref{tab:sourcefaces}. The first column displays the Original Image (Source Face), while subsequent columns showcase the Attack Faces.
-    }
-    \label{fig:twenty2}
-\end{figure*}
-
+One Face to Rule Them All Algorithm for carrying out the Multi Identity Impersonation of 5749 identities using faces 11 to 20 from a pool of 20. Each row's data corresponds to the information presented in Table~\ref{tab:sourcefaces}. The first column displays the Original Image (Source Face), while subsequent columns showcase the Attack Faces. 
+![One Face to Rule Them All Algorithm for carrying out the Multi Identity Impersonation of 5749 identities using faces 11 to 20 from a pool of 20. Each row's data corresponds to the information presented in Table~\ref{tab:sourcefaces}. The first column displays the Original Image (Source Face), while subsequent columns showcase the Attack Faces.](https://github.com/enazari/oneface/blob/master/other/assets/twenty-second.png)
 
 
 
@@ -162,31 +135,11 @@ We tested the initial value of $th2$ of 1.055 and included four other $th2$ valu
 In Phase 1 and Phase 2, the coverage of the DodgeSet when using the default value of 1.055 is 7.65\% and 30.20\%, respectively. Our special purpose GA was not able to avoid 7.65\% of the $\overline{DodgeSet}$ members in the embedding space while the generated Attack Faces could not dodge 30.2\% of the DodgeSet cases. 
 Increasing the DodgeSet $th2$ by 3\% led to a significant decrease in coverage percentages of the DodgeSet in both phases, which confirms that increasing the threshold $th2$ helps to keep the Attack Faces further away from the DodgeSet cases. However, we observe that the MatchSet coverage is negatively impacted by this change, showing a decreased coverage. The MatchSet coverage continues to decrease as the threshold $th2$ increases while the coverage of the DodgeSet tends to zero. After an increase of 4\% in the $th2$ only the MatchSet coverage is being affected because the DodgeSet coverage is already very close to the ideal value of zero. Therefore, we confirm that adjusting the DodgeSet threshold ratio can help to achieve better dodging results while experiencing lower impersonation results. This trade-off should be taken into account based on the problem's nature and the importance of dodging versus impersonation.
 
-\begin{table}
-\centering
-\caption{Coverage results for different DodgeSet thresholds $th2$ on Phases 1 and 2 (Phase 2 results in parenthesis). }\label{tab:nthresh}
-\resizebox{0.4\textwidth}{!}{
-\begin{tabular}{@{}cccc@{}}
-
-\toprule
-$th2$& increase \% &
-MatchSet Cov. & DodgeSet Cov.\\
-\midrule
-1.055&  -                     & 56.00 (54.68)                                         & 7.65 (30.20)                                      \\
-1.086 & 3\%                & 41.56 (42.30)                                      & 0.00 (3.04)                                       \\
-1.097 & 4\%                & 37.98 (39.50)                                      & 0.00 (1.48)                                       \\
-1.107 & 5\%                 & 30.46 (35.62)                                        & 0.00 (0.60)                                       \\
-1.118 & 6\%                 & 31.02 (33.72)                                      & 0.00 (0.40)                                       \\
-\bottomrule
-% \end{tblr}
-\end{tabular}
-}
-
-\end{table}
+Coverage results for different DodgeSet thresholds $th2$ on Phases 1 and 2 (Phase 2 results in parenthesis) are shown in the table bellow:
+![Coverage results for different DodgeSet thresholds $th2$ on Phases 1 and 2 (Phase 2 results in parenthesis).](https://github.com/enazari/oneface/blob/master/other/assets/thresholds.png)
 
 
-
-## Phase 2 - An Alternative the genetic algorithm: Projected Mean 
+<!-- ## Phase 2 - An Alternative the genetic algorithm: Projected Mean 
 It is possible that the average of all the $\overline{MatchSet}_i}$ members is close enough to most of its members (however, there is no guarantee that it is far enough from the $\overline{DodgeSet}$ members). Constrained by embedding space, if the search space is the surface of a hyper-sphere, the average point of some disjoint points will land inside it. In such embedding spaces, we project the average point back onto the hyper-sphere's surface. Table~\ref{PM_GA} indicates projected mean yields good candidate points when $\overline{DodgeSet}$ is empty. The contrast is more clear in difficult cases where $\overline{DodgeSet}$ is not empty. Therefore, the genetic algorithm is works much better than simple projection of the average of $\overline{MatchSet}$ onto the unit hyper-sphere. 
 
 \begin{table}
@@ -207,29 +160,25 @@ It is possible that the average of all the $\overline{MatchSet}_i}$ members is c
         100 &         500 & Projected Mean &              76.50 &              29.60 \\ \bottomrule
 \end{tabular}
 }
-\end{table}
+\end{table} -->
 
 
 
-## Sensitivity of parameter $\gamma$
-Parameter $\gamma$ in the GA Fitness function weights the $DPloss$ of the $\overline{MatchSet}$ and $\overline{DodgeSet}$. We randomly selected 1000 $\overline{MatchSet}$ members and 500 $\overline{DodgeSet}$ members and tested the values of 0, 0.1, 0.3, 0.5, 0.7, 0.9, and 1 for parameter $\gamma$. We repeated these experiments five times and reported the average. Figure~\ref{fig:gamma} shows the results of these experiments. 
+## Sensitivity of parameter gamma
+Parameter gamma in the GA Fitness function weights the $DPloss$ of the $\overline{MatchSet}$ and $\overline{DodgeSet}$. We randomly selected 1000 $\overline{MatchSet}$ members and 500 $\overline{DodgeSet}$ members and tested the values of 0, 0.1, 0.3, 0.5, 0.7, 0.9, and 1 for parameter gamma. We repeated these experiments five times and reported the average. Figure~\ref{fig:gamma} shows the results of these experiments. 
 
-We observe that, when $\gamma$ is 0, the focus is entirely on evading $\overline{DodgeSet}$ members, leading to the neglect of $\overline{MatchSet}$ members. On the other hand, when $\gamma$ is 1, the coverage of $\overline{MatchSet}$ members peaks, while $\overline{DodgeSet}$ members are ignored during dodging, resulting in a coverage of a significant percentage of $\overline{DodgeSet}$ members. With an increase in $\gamma$ to 0.1, $\overline{MatchSet}$ members gain considerable coverage while the coverage of $\overline{DodgeSet}$ does not increase significantly. As $\gamma$ continues to grow, the emphasis on $\overline{MatchSet}$ increases, resulting in coverage of more members, while the emphasis on $\overline{DodgeSet}$ decreases, leading to less dodging of $\overline{DodgeSet}$ members. Overall, the results are fairly stable for values of $\gamma$ between 0.1 and 0.9.  
+We observe that, when gamma is 0, the focus is entirely on evading $\overline{DodgeSet}$ members, leading to the neglect of $\overline{MatchSet}$ members. On the other hand, when gamma is 1, the coverage of $\overline{MatchSet}$ members peaks, while $\overline{DodgeSet}$ members are ignored during dodging, resulting in a coverage of a significant percentage of $\overline{DodgeSet}$ members. With an increase in gamma to 0.1, $\overline{MatchSet}$ members gain considerable coverage while the coverage of $\overline{DodgeSet}$ does not increase significantly. As gamma continues to grow, the emphasis on $\overline{MatchSet}$ increases, resulting in coverage of more members, while the emphasis on $\overline{DodgeSet}$ decreases, leading to less dodging of $\overline{DodgeSet}$ members. Overall, the results are fairly stable for values of gamma between 0.1 and 0.9.  
 
 
-\begin{figure}[!t]
-    \centering
-    \includegraphics[width=0.3\textwidth]{plots/gamma.png}
-    \caption{Impact of $\gamma$ on the coverage of $\overline{MatchSet}$ and $\overline{DodgeSet}$.}
-    \label{fig:gamma}
-\end{figure}
+Impact of gamma on the coverage of MatchSet and DodgeSet:
+![Impact of gamma on the coverage of MatchSet and DodgeSet.](https://github.com/enazari/oneface/blob/master/other/assets/gamma.png)
 
 
 
 
 
 
-## Measuring the attack difficulty \label{sec:difficulty}
+<!-- ## Measuring the attack difficulty \label{sec:difficulty}
 Given the FV system robustness and the identities and number of images selected for MatchSet and DodgeSet, the DodgePersonation Attack can be more difficult or easy to solve. Based on the above taxonomy and definitions, we defined three measures to assess the difficulty of the system. 
 
 \begin{definition}[System Difficulty Measure]\label{def:sys-dif}
@@ -321,7 +270,7 @@ MatchSet size & DodgeSet size & System Difficulty Measure & System Positive Diff
 \end{tblr}
 \label{tab:system-difficulty-male-female}
 \end{table}
-
+ -->
 
 
 
