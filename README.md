@@ -73,7 +73,7 @@ Algorithm~\ref{alg:phase2} describes the procedural steps for executing the Dodg
 
 
 ## Algorithm: One Face to Rule Them All - Phase 2: Attack Face Generation
-![One Face to Rule Them All Algorithm - Phase 2: Attack Face Generation.](https://github.com/enazari/oneface/assets/algo1.png)
+![One Face to Rule Them All Algorithm - Phase 2: Attack Face Generation.](https://github.com/enazari/oneface/blob/master/other/assets/algo1.png)
 **Input:**
 - `x`: Source Face
 - `\bar{y}`: point in the embedding space returned in Phase 1
